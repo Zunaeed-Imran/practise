@@ -4,15 +4,20 @@ require_once('connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   echo 'sucessful input<br>';
+
   $name = uniqid(rand(), true);
   echo "sucessful image upload name {$name}<br>";
+
   $ext = end((explode(".", $_FILES['image']['name'])));
   echo "explode sucessful {$ext}<br>";
+
   $image = "images/{$name}.{$ext}";
   echo "image upload file sucessful {$image}";
+
   // $image = "images/{$_FILES['image']['name']}";
   if (move_uploaded_file($_FILES['image']['tmp_name'], $image) && $conn->query("INSERT INTO `practice_crud` (`name`, `image`) VALUES ('{$_POST['name']}', '{$image}');")) {
     echo "sucessfull all";
+    
     header('location: ./');
   }
 }
