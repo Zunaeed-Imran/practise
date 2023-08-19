@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     echo "Image path also sucessful {$image}<br>";
     
-    // $image = "images/{$_FILES['image']['name']}";
 
     $is_moved = move_uploaded_file($_FILES['image']['tmp_name'], $image);
 
