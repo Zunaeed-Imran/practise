@@ -12,12 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   echo "explode sucessful {$ext}<br>";
 
   $image = "images/{$name}.{$ext}";
-  echo "image upload file sucessful {$image}";
+  echo "image upload file sucessful {$image}<br>";
+
+  $moved = move_uploaded_file($_FILES['image']['tmp_name'], $image);
+  echo "image move sucessful: " . ($moved ? 'yes' : 'no') . "<br>";
 
   // $image = "images/{$_FILES['image']['name']}";
-  if (move_uploaded_file($_FILES['image']['tmp_name'], $image) && $conn->query("INSERT INTO `practice_crud` (`name`, `image`) VALUES ('{$_POST['name']}', '{$image}');")) {
-    echo "sucessfull all";
-    
+  if ($moved && $conn->query("INSERT INTO `practice_crud` (`name`, `image`) VALUES ('{$_POST['name']}', '{$image}');")) {
+    echo "sucessfull all<br>";
+
     header('location: ./');
   }
 }
