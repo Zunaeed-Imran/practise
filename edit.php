@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = uniqid(rand(), true);
   $ext = end((explode(".", $_FILES['image']['name'])));
   $image = "images/{$name}.{$ext}";
-  // $image = "images/{$_FILES['image']['name']}";
+
   if (move_uploaded_file($_FILES['image']['tmp_name'], $image) && $conn->query("UPDATE `practice_crud` SET `name` = '{$_POST['name']}', `image` = '{$image}' WHERE `id` = {$_GET['id']};")) {
     header('location: ./');
   }
